@@ -7,29 +7,30 @@ Red [
 ]
 
 ; you should use that public interface to test your code
+#include %internal.red
 
 context [
     run: func [
         path[file!]
     ] [
-        require-path-exist path
-        clear-context
+        internal/require-path-exist path
+        internal/clear-context
 
-        print-bordered-header "RedUnit v0.0.3"
+        internal/print-bordered-header "RedUnit v0.0.3"
         prin newline
 
         case [
-            dir? path [ run-dir path ]
-            file? path [ run-file path ]
+            dir? path [ internal/run-dir path ]
+            file? path [ internal/run-file path ]
         ]
 
-        print-summary
+        internal/print-summary
 
         comment {
             CLI exit code for continuous integration
             (0 - success, 1 - failure)
         }
-        quit-when-errors
+        internal/quit-when-errors
     ]
 
     set-test-filename-prefix: func [

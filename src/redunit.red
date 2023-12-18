@@ -12,7 +12,6 @@ redunit-modules-builder: context [
     build: does [
         /local modules: context []
 
-        modules: add-object-from-file %modules/internal.red modules
         modules: add-object-from-file %modules/assertions.red modules
         modules: add-object-from-file %modules/general.red modules
 
