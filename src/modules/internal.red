@@ -10,6 +10,7 @@ Red [
 context [
     /local errors: make map![]
     /local tests: copy []
+    /local test-count: 0
     /local setup-detected: false
     /local error-expected: false
     /local actual-filepath: copy ""
@@ -92,6 +93,7 @@ context [
                 ]
                 find/case method-name "test" [
                     insert tail tests method
+                    test-count: test-count + 1
                 ]
             ]
         ]
@@ -261,7 +263,7 @@ context [
         error-count: (length? errors)
 
         prin rejoin [
-            length? tests " tests"
+            test-count " tests"
             ", " assertions-count " assertions"
         ]
 
@@ -298,6 +300,7 @@ context [
     /local clear-context: does [
         errors: make map![]
         tests: copy []
+        test-count: 0
         setup-detected: false
         error-expected: false
         actual-test-name: copy ""
