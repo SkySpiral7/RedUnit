@@ -52,7 +52,11 @@ context [
         different-data: not (strict-equal? expected actual)
 
         if different-data [
-            message: "Expected equivalent values, but they are different."
+            message: rejoin [
+                "Expected equivalent values, but they are different." newline
+                "Expected (" (type? expected) "): " expected newline
+                "  Actual (" (type? actual) "): " actual newline
+            ]
             fail-test message "equals"
         ]
     ]
