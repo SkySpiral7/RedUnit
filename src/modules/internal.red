@@ -7,7 +7,7 @@ Red [
     File: %internal.red
 ]
 
-context [
+internal: context [
     /local errors: make map![]
     /local tests: copy []
     /local test-count: 0
