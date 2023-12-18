@@ -91,7 +91,7 @@ internal: context [
                 method-name = "setup" [
                     setup-detected: true
                 ]
-                find/case method-name "test" [
+                (copy/part method-name 4) = "test" [
                     insert tail tests method
                     test-count: test-count + 1
                 ]
