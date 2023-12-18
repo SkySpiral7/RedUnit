@@ -11,7 +11,7 @@ Version: **0.0.3**
 Test framework for running tests of Red language scripts. Inspired by *PhpUnit*, *xUnit*, *nUnit* and other similar libraries.
 
 **RedUnit** expects that you will give him a filepath (`file!`) to Red script with `object!`, which will contain test methods.
-Each test method name should be started with word `test`.
+Each test method name must start with word `test`.
 
 Optionally `setup` method will be executed before each test separately (only if `object!` consist method with name `setup`).
 
