@@ -11,6 +11,7 @@ internal: context [
     /local errors: make map![]
     /local tests: copy []
     /local test-count: 0
+    /local assertions-count: 0
     /local setup-detected: false
     /local error-expected: false
     /local actual-filepath: copy ""
