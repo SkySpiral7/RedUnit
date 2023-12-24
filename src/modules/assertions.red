@@ -8,17 +8,16 @@ Red [
 ]
 
 ;-- You can use this assertions to test your code
+#include %internal.red
 
 context [
-    assertions-count: 0
-
     increment-assertion: does [
-        assertions-count: assertions-count + 1
+        internal/assertions-count: internal/assertions-count + 1
     ]
 
     expect-error: does [
         "Mark that actually executed test should throw an error. Other tests will not be affected."
-        error-expected: true
+        internal/error-expected: true
         increment-assertion
     ]
 
@@ -29,7 +28,7 @@ context [
         increment-assertion
         unless value [
             message: "Expected value was 'true', but 'false' given."
-            fail-test message "true"
+            internal/fail-test message "true"
         ]
     ]
 
@@ -40,7 +39,7 @@ context [
         increment-assertion
         if value [
             message: "Expected value was 'false', but 'true' given."
-            fail-test message "false"
+            internal/fail-test message "false"
         ]
     ]
 
@@ -57,7 +56,7 @@ context [
                 "Expected (" (type? expected) "): " expected newline
                 "  Actual (" (type? actual) "): " actual newline
             ]
-            fail-test message "equals"
+            internal/fail-test message "equals"
         ]
     ]
 
@@ -70,7 +69,7 @@ context [
 
         if same-data [
             message: "Expected different values, but they are equivalent."
-            fail-test message "not-equals"
+            internal/fail-test message "not-equals"
         ]
     ]
 
@@ -83,7 +82,7 @@ context [
 
         if different-memory-location [
             message: "Expected identical values, regarding memory location, but they are different."
-            fail-test message "identical"
+            internal/fail-test message "identical"
         ]
     ]
 
@@ -96,7 +95,7 @@ context [
 
         if identical-memory-location [
             message: "Expected different values, regarding memory location, but they are identical."
-            fail-test message "not-identical"
+            internal/fail-test message "not-identical"
         ]
     ]
 ]
