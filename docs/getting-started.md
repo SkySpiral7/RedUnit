@@ -165,7 +165,7 @@ redunit/run %tests/poc-tests.red
 Console output:
 
 ```bash
-./red-063-linux -s examples/run-one-file.red
+./red -s examples/run-one-file.red
 ┌────────────────┐
 │ RedUnit v0.0.3 │
 └────────────────┘
@@ -203,7 +203,7 @@ FF...F...F
 ### Caused by assertions (example 1)
 
 ```bash
-./red-063-linux examples/run-directory.red
+./red examples/run-directory.red
 ┌────────────────┐
 │ RedUnit v0.0.3 │
 └────────────────┘
