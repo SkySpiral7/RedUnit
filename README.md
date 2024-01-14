@@ -19,7 +19,7 @@ The **RedUnit** unit test framework obviously can't test itself - so for now it 
 
 ## Compatibility
 
-Project was tested with red-02jan24-b34f787db.
+Project was tested with red-13jan24-4b95ca192.
 
 ## Features (Roadmap)
 - [x] v **0.0.1-Snapshot** special assertion for expected error
