@@ -45,13 +45,14 @@ internal: context [
         filepath[file!]
     ] [
         actual-filepath: filepath
+        ;make filepath absolute so that it's unaffected by change-dir
+        filepath: clean-path filepath
         file-dir: pick (split-path filepath) 1
 
         ; load testable file
         boot-dir: what-dir
-        code: read filepath
         change-dir file-dir
-        testable: do code
+        testable: do filepath
 
         run-object testable
 
