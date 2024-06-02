@@ -119,26 +119,30 @@ internal: context [
 
         errors-before: length? errors
 
-        was-error: none? attempt [
-            result: try [do test]
+        ;note that a failed assert will not cause-error so that multiple assertions can fail per test.
+        ;failed assertions will return so this code will be was-error: false
+        was-error: error? result: try/all [
+            ;ignore test's return value
+            do test
+            ;if test didn't throw or cause-error then result is set to none
+            none
         ]
 
-        unless none? result [
-            case [
-                was-error and (not error-expected) [
+        case [
+            was-error and (not error-expected) [
 
-                    error-header: rejoin [
-                        "│ File      : " actual-filepath "^/"
-                        "│ Method    : " actual-test-name "^/"
-                        "^/Runtime error detected, but there wasn't any assertion dedicated for expecting error. ^/"
-                    ]
+                error-header: rejoin [
+                    "│ File      : " actual-filepath newline
+                    "│ Method    : " actual-test-name newline
+                    newline
+                    "Runtime error detected, but there wasn't any assertion dedicated for expecting error." newline
+                ]
 
-                    put errors error-header result
-                ]
-                (not was-error) and error-expected [
-                    message: "Expected error, but nothing happen."
-                    fail-test message "error-expected"
-                ]
+                put errors error-header result
+            ]
+            (not was-error) and error-expected [
+                message: "Expected error, but nothing happen."
+                fail-test message "error-expected"
             ]
         ]
 
@@ -254,9 +258,9 @@ internal: context [
         ]
 
         prin rejoin [
-            "┌─" space  "─┐^/"
-            "│ " header " │^/"
-            "└─" space  "─┘^/"
+            "┌─" space  "─┐" newline
+            "│ " header " │" newline
+            "└─" space  "─┘" newline
         ]
     ]
 
@@ -290,9 +294,9 @@ internal: context [
         message[string!] assertion[string!]
     ] [
         error-header: rejoin [
-            "│ File      : " actual-filepath "^/"
-            "│ Method    : " actual-test-name "^/"
-            "│ Assertion : " assertion "^/"
+            "│ File      : " actual-filepath newline
+            "│ Method    : " actual-test-name newline
+            "│ Assertion : " assertion newline
         ]
 
         put errors error-header message
