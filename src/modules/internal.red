@@ -65,11 +65,14 @@ internal: context [
     ] [
         process-testable-methods testable
 
+        setup: either setup-detected
+            [:testable/setup]
+            [none]
+
         started: now/time/precise/utc
 
         foreach test tests [
-            if setup-detected [do testable/setup]
-            execute-test test
+            execute-test :setup test
         ]
 
         ended: now/time/precise/utc
@@ -108,7 +111,7 @@ internal: context [
 
     /local execute-test: func [
         "Executes one test method"
-        test
+        setup[function! none!] test[word!]
     ] [
         ; reset context of expected error for each test
         error-expected: false
@@ -122,6 +125,7 @@ internal: context [
         ;note that a failed assert will not cause-error so that multiple assertions can fail per test.
         ;failed assertions will return so this code will be was-error: false
         was-error: error? result: try/all [
+            setup
             ;ignore test's return value
             do test
             ;if test didn't throw or cause-error then result is set to none
